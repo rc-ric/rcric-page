@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCRIC | Rajuk College Robotics & ICT Club</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Variable Fonts (Display & Body) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Inconsolata:wght@200..900&display=swap"
+    rel="stylesheet">
+
+  <!-- Static/Standard Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&family=Oxanium:wght@200;300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inconsolata", "IBM Plex Mono", "Space Mono", "monospace"],
+            display: ["Orbitron", "sans-serif"],
+            tech: ["Orbitron", "monospace"],
+          },
+          colors: {
+            accent: "#9333ea",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Styles (organized into modules) -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/preloader.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <link rel="icon" href="favicon_io/favicon.ico" />
+  <link rel="manifest" href="favicon_io/site.webmanifest" />
+
+</head>
+
+<body class="bg-black text-white font-sans font-bold antialiased overflow-x-hidden">
+  <div id="site-preloader" aria-live="polite" aria-label="Loading page">
+    <div class="preloader-grid"></div>
+    <div class="preloader-panel">
+      <div class="tech-corner tl !w-6 !h-6 !border-white/10"></div>
+      <div class="tech-corner tr !w-6 !h-6 !border-white/10"></div>
+      <div class="tech-corner bl !w-6 !h-6 !border-white/10"></div>
+      <div class="tech-corner br !w-6 !h-6 !border-white/10"></div>
+      <div class="preloader-label font-tech text-accent/80 tracking-[0.4em]">// RCRIC_BOOT_SEQUENCE</div>
+      <div class="preloader-brand">RCRIC</div>
+      <div class="preloader-status-row">
+        <span>INITIALIZING_SYSTEMS</span>
+        <span id="preloader-percent">1%</span>
+      </div>
+      <div class="preloader-bar-wrap" role="progressbar" aria-valuemin="1" aria-valuemax="100" aria-valuenow="1"
+        aria-label="Website loading progress">
+        <div id="preloader-bar" class="preloader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-bg"></div>
+  <div class="grid-lights" aria-hidden="true">
+    <div class="grid-orb orb-1"></div>
+    <div class="grid-orb orb-2"></div>
+    <div class="grid-orb orb-3"></div>
+    <div class="grid-orb orb-4"></div>
+  </div>
+
+  <header class="fixed top-6 left-0 right-0 mx-auto w-[95%] max-w-[1200px] z-50" id="header">
+    <nav class="nav-floating w-full flex items-center justify-between px-7 py-4 relative" id="main-nav">
+      <!-- Left accent dots -->
+      <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between py-2 pl-0 pointer-events-none"
+        style="width: 2px; opacity: 0"></div>
+
+      <!-- Logo -->
+      <div class="nav-logo relative z-10" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <span>RCRIC</span>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden lg:flex items-center gap-0">
+        <li><a href="#home" class="nav-item" data-label="HOME">HOME</a></li>
+        <li>
+          <a href="#features" class="nav-item" data-label="ACTIVITIES">ACTIVITIES</a>
+        </li>
+        <li>
+          <a href="#projects" class="nav-item" data-label="PROJECT">PROJECT</a>
+        </li>
+        <li>
+          <a href="#achievements" class="nav-item" data-label="ACHIEVEMENTS">ACHIEVEMENTS</a>
+        </li>
+        <li>
+          <a href="#about" class="nav-item" data-label="ABOUT">ABOUT</a>
+        </li>
+        <li>
+          <a href="pages/executives.html" class="nav-item" data-label="EXECUTIVES">EXECUTIVES</a>
+        </li>
+        <li>
+          <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank" class="nav-item nav-btn-join"
+            data-label="JOIN">JOIN</a>
+        </li>
+      </ul>
+
+      <!-- Hamburger (mobile) -->
+      <button id="menu-btn" class="lg:hidden relative z-50 p-2 text-white/70 hover:text-white" aria-label="Toggle menu">
+        <div class="w-6 flex flex-col gap-[6px]">
+          <span class="hamburger-bar w-full"></span>
+          <span class="hamburger-bar w-4/5"></span>
+          <span class="hamburger-bar w-3/5"></span>
+        </div>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+    <button class="mobile-menu-close" aria-label="Close translation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <a href="#home">HOME</a>
+    <a href="#features">ACTIVITIES</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#achievements">ACHIEVEMENTS</a>
+    <a href="#about">ABOUT</a>
+    <a href="pages/executives.html">EXECUTIVES</a>
+    <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank"
+      class="nav-btn-join !ml-0 !mt-12 !px-16 !py-6 !text-[22px] !tracking-normal !font-black !w-auto">JOIN US</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home"
+    class="min-h-screen flex items-center pt-24 pb-12 relative px-0 lg:px-4 bg-black/20 backdrop-blur-[2px]">
+    <div class="max-w-[1200px] w-[95%] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+      <!-- MOBILE HERO (Reference Image Design) -->
+      <div class="lg:hidden col-span-1 flex flex-col items-start text-left pt-16 px-4 sm:px-8 pl-10 sm:pl-14">
+        <h1
+          class="font-display text-[3.8rem] xs:text-[4.5rem] font-bold tracking-tighter mb-10 leading-[1.05] reveal-text">
+          <span
+            class="block bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Innovate</span>
+          <span
+            class="block bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Today,</span>
+          <span
+            class="block bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Lead</span>
+          <span
+            class="block bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Tomorrow.</span>
+        </h1>
+
+        <p class="text-white/50 font-body text-base mb-12 w-full leading-relaxed reveal-text delay-200">
+          From functional robotics to advanced ICT, we bridge the gap between imagination and engineering. We compete,
+          we innovate, and we lead tech enthusiasts for the future.
+        </p>
+
+        <div class="reveal-text delay-300 w-full flex justify-center mt-6">
+          <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank"
+            class="nav-btn-join !px-12 !py-4 !text-[14px] !ml-0 transition-all duration-300 shadow-[0_0_35px_rgba(147,51,234,0.35)] hover:shadow-[0_0_55px_rgba(147,51,234,0.55)] !tracking-[0.25em] font-extrabold text-center inline-block">
+            JOIN THE TEAM
+          </a>
+        </div>
+      </div>
+
+      <!-- DESKTOP HERO TEXT (Original Design) -->
+      <div class="hidden lg:flex lg:col-span-5 flex-col items-start text-left z-10 space-y-8 overflow-visible">
+        <div class="glass-tag reveal-text delay-100">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <code
+            class="font-tech text-[10px] tracking-wider text-white/90 font-bold glass-code px-3 py-1.5 rounded">// RAJUK COLLEGE ROBOTICS & ICT CLUB</code>
+        </div>
+
+        <h1
+          class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-7xl font-bold leading-[1.1] tracking-tight w-full">
+          <span
+            class="block bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Innovate
+            Today,</span>
+          <span
+            class="block mt-3 sm:mt-2 bg-gradient-to-r from-[#0D0613] via-[#f5f3ff] to-white bg-clip-text text-transparent">Lead
+            Tomorrow.</span>
+        </h1>
+
+        <p class="text-lg text-white/60 max-w-xl leading-relaxed font-light reveal-text delay-200">
+          From functional robotics to advanced ICT, we bridge the gap between imagination and engineering. We compete,
+          we innovate, and we lead tech enthusiasts for the future.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto reveal-text delay-300 pt-4">
+          <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank"
+            class="nav-btn-join !px-12 !py-4 !text-[15px] !ml-0 transition-all duration-300 shadow-[0_0_35px_rgba(147,51,234,0.35)] hover:shadow-[0_0_55px_rgba(147,51,234,0.55)] !tracking-[0.25em] font-extrabold items-center flex">
+            JOIN THE TEAM
+          </a>
+        </div>
+      </div>
+
+      <!-- DESKTOP HERO IMAGE (Original Design) -->
+      <div
+        class="hidden lg:flex lg:col-span-7 relative h-[400px] md:h-[500px] lg:h-[550px] w-full max-w-xl lg:ml-auto lg:mr-0 flex items-center justify-center group perspective-1000">
+        <div
+          class="absolute inset-x-4 inset-y-12 border border-white/5 pointer-events-none transition-colors duration-500 group-hover:border-white/10">
+        </div>
+        <div class="absolute inset-x-4 inset-y-12 pointer-events-none p-6">
+          <div class="tech-corner tl"></div>
+          <div class="tech-corner tr"></div>
+          <div class="tech-corner bl"></div>
+          <div class="tech-corner br"></div>
+        </div>
+        <div class="relative z-10 w-full max-w-md transition-transform duration-700 ease-out" id="model-container">
+          <img src="assets/home-rover-original-opt.jpg" alt="Solaris V1"
+            class="w-full h-auto grayscale contrast-125 brightness-100 group-hover:grayscale-0 transition-all duration-700 drop-shadow-[0_0_35px_rgba(147,51,234,0.2)]" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-32 px-6 relative bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-display text-4xl md:text-6xl font-bold text-center text-white tracking-tight mb-16">
+        Activities
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+        <!-- Feature 1 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Workshops Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2522 22.1614 16.5523C21.6184 15.8524 20.8581 15.3516 20 15.13"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11903 19.0078 7.01C19.0078 7.90097 18.7122 8.76608 18.1676 9.46768C17.623 10.1693 16.8604 10.6697 16 10.89"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Weekly Workshops
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Weekly workshops provide an opportunity to learn robotics and modern technology.
+            Members interact, design, build, and test ideas while sharing knowledge and solving problems together.
+            The sessions support both beginners and experienced learners, helping them develop skills step by step in an
+            engaging environment.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Robotics Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 8V4M12 4L15 7M12 4L9 7" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path
+              d="M5 11C5 10.4696 5.21071 9.96086 5.58579 9.58579C5.96086 9.21071 6.46957 9 7 9H17C17.5304 9 18.0391 9.21071 18.4142 9.58579C18.7893 9.96086 19 10.4696 19 11V18C19 18.5304 18.7893 19.0391 18.4142 19.4142C18.0391 19.7893 17.5304 20 17 20H7C6.46957 20 5.96086 19.7893 5.58579 19.4142C5.21071 19.0391 5 18.5304 5 18V11Z"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 13H9.01M15 13H15.01M10 17H14" stroke="#9333ea" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Robotics
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Blend into the world of Robotics with the help of basic engineering, programming, and artificial
+            intelligence to create machines that mimic human actions and solve real-world problems.
+            From basic LFR to Rovers, Drones, etc., develop functional and modern robots.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Programming Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 8L3 12L7 16" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M17 8L21 12L17 16" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M14 4L10 20" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Programming
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Discover the exciting world of coding and see how computers and robots follow instructions.
+            Learn the basics of programming using languages like Python, C++, and Arduino, and create fun projects.
+            Turn lines of code into awesome robots, apps, and gadgets, and bring your ideas to life!
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Web Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M2 12H22M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Web design & Development
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Master the art of building modern interactive websites.
+            By combining visual design with technical programming, learn the skills needed to build, host, and manage
+            your own web projects from scratch.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Graphics Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21L21 17V7L12 3L3 7V17L12 21Z" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M3 7L12 11L21 7M12 21V11" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Graphics and 3D Design
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Dive deeply into the world of Robotics and ICT by empowering yourself to transform ideas
+            into real prototypes using tools like Blender, Fusion 360, Canva, Adobe Illustrator, and more to design
+            projects in 3d and with appealing graphics.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card p-10 group text-center flex flex-col items-center">
+          <div class="feature-card-shine"></div>
+          <!-- Competitions Icon -->
+          <svg class="w-10 h-10 mb-7 drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10"
+              stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-xl font-semibold mb-3 text-white">
+            Competitions
+          </h3>
+          <p class="text-white/60 text-sm leading-relaxed font-light">
+            Ignite your passion and skills in the areas of Robotics, AI, Design, Esports and many more in our thrilling
+            competitions. Prove your brilliance and talent by participating in our competitive events and win prizes
+            now.
+            The biggest event we organized is EON Spectral Shift'17, the first national event on robotics in Bangladesh.
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Showcase -->
+  <section id="projects" class="py-32 px-6 relative overflow-hidden bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="flex flex-col items-center mb-16">
+        <h2 class="font-display text-4xl md:text-6xl font-bold text-center text-white tracking-tight mb-16">
+          Active Project
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <!-- Visual Module (Image) -->
+        <div class="relative h-[400px] lg:h-auto overflow-hidden group rounded-lg border border-white/10 reveal-left">
+          <div class="tech-corner tl !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner tr !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner bl !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner br !w-6 !h-6 !border-white/20"></div>
+
+          <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=600&auto=format&fit=crop"
+            alt="Solaris V1" class="w-full h-full object-cover transition-all duration-1000" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none">
+          </div>
+        </div>
+
+        <!-- Command Info Module (Description Card) -->
+        <div class="reveal-right">
+          <div class="feature-card p-8 lg:p-12 h-full flex flex-col justify-center relative overflow-hidden group">
+            <div class="feature-card-shine"></div>
+            <div class="scan-line"></div>
+
+            <div class="mb-8 relative z-10">
+              <h3 class="font-display text-3xl sm:text-4xl font-bold mb-8 text-white tracking-tight">
+                SOLARIS V1
+              </h3>
+              <p class="text-white/60 text-base leading-relaxed font-light mb-0 text-center lg:text-left">
+                The <b class="text-white">Solaris V1</b> is a high-intensity <b class="text-white">Mars Rover
+                  Prototype</b>, engineered to conquer extreme terrains through advanced robotic command. Inspired by
+                planetary exploration, it utilizes a sophisticated <b class="text-white">Rocker-Bogie suspension
+                  system</b> for stability. Equipped with a <b class="text-white">7-DOF robotic arm</b> and a real-time
+                <b class="text-white">HD camera link</b>, Solaris V1 executes manipulation tasks with tactical
+                precision.
+                At its core, an <b class="text-white">Arduino Mega 2560</b> drives the system.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10 relative z-10 w-full">
+              <div class="stat-item">
+                <div class="text-[10px] uppercase tracking-[0.3em] text-accent mb-2 font-bold opacity-80">// PROCESSOR
+                </div>
+                <div class="text-sm md:text-base font-tech text-white">MEGA 2560 R3</div>
+              </div>
+              <div class="stat-item">
+                <div class="text-[10px] uppercase tracking-[0.3em] text-accent mb-2 font-bold opacity-80">// TELEMETRY
+                </div>
+                <div class="text-sm md:text-base font-tech text-white">2.4GHz GFSK</div>
+              </div>
+              <div class="stat-item">
+                <div class="text-[10px] uppercase tracking-[0.3em] text-accent mb-2 font-bold opacity-80">// DRIVE</div>
+                <div class="text-sm md:text-base font-tech text-white">6WD TORQUE+</div>
+              </div>
+              <div class="stat-item">
+                <div class="text-[10px] uppercase tracking-[0.3em] text-accent mb-2 font-bold opacity-80">// POWER</div>
+                <div class="text-sm md:text-base font-tech text-white">11.1V LI-PO</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="py-32 px-6 relative overflow-hidden bg-black/30 backdrop-blur-md border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="flex flex-col items-center mb-16">
+        <h2 class="font-display text-4xl md:text-6xl font-bold text-center text-white tracking-tight mb-16">
+          Achievements
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <!-- Achievement Dossier: Tahsin Haque -->
+        <div class="flex flex-col h-full">
+          <!-- Big Picture Frame -->
+          <div class="relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10 bg-black/20 mb-8">
+            <div class="tech-corner tl !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner tr !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner bl !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner br !w-6 !h-6 !border-white/20"></div>
+            
+            <img src="assets/a1.webp" alt="Tahsin Haque" class="w-full h-full object-cover" />
+
+            <!-- Absolute Bottom Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 pt-20 bg-gradient-to-t from-black via-black/60 to-transparent">
+               <h3 class="font-display text-2xl font-bold text-white mb-0 uppercase tracking-tight drop-shadow-2xl">Tahsin Haque</h3>
+            </div>
+          </div>
+
+          <!-- Dossier Info -->
+          <div class="p-10 flex-grow relative overflow-hidden bg-black/20 backdrop-blur-md border border-white/10 rounded-lg group">
+            <div class="feature-card-shine"></div>
+            <div class="space-y-6 relative z-10">
+              <div class="flex items-start gap-5 pb-6 border-b border-white/5">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide uppercase leading-tight">World Robot Oympiad Bangladesh 2025 National Champion</h4>
+                </div>
+              </div>
+              <div class="flex items-start gap-5">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide uppercase leading-tight">World Robot Oympiad Bangladesh Open Championship 2025 National Champion</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievement Dossier: Md. Riasat Islam -->
+        <div class="flex flex-col h-full">
+          <!-- Big Picture Frame -->
+          <div class="relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10 bg-black/20 mb-8">
+            <div class="tech-corner tl !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner tr !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner bl !w-6 !h-6 !border-white/20"></div>
+            <div class="tech-corner br !w-6 !h-6 !border-white/20"></div>
+
+            <img src="assets/a2.webp" alt="Md. Riasat Islam" class="w-full h-full object-cover" />
+
+            <!-- Absolute Bottom Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 pt-20 bg-gradient-to-t from-black via-black/60 to-transparent">
+               <h3 class="font-display text-2xl font-bold text-white mb-0 uppercase tracking-tight drop-shadow-2xl">Md. Riasat Islam</h3>
+            </div>
+          </div>
+
+          <!-- Dossier Info -->
+          <div class="p-10 flex-grow relative overflow-hidden bg-black/20 backdrop-blur-md border border-white/10 rounded-lg group">
+            <div class="feature-card-shine"></div>
+            <div class="space-y-6 relative z-10">
+              <div class="flex items-start gap-5 pb-6 border-b border-white/5">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide uppercase leading-tight">International Olympiad in Artificial Intelligence (IOAI) Bronze for Bangladesh</h4>
+                </div>
+              </div>
+              <div class="flex items-start gap-5 pb-6 border-b border-white/5">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide uppercase leading-tight">Bangladesh Olympiad in AI (BdAIO) national winner</h4>
+                </div>
+              </div>
+              <div class="flex items-start gap-5">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 21H16M12 17V21M7 4H17M17 4C18.86 4 20 5.14 20 7C20 8.86 18.86 10 17 10V10M17 4V13C17 14.0609 16.5786 15.0783 15.8284 15.8284C15.0783 16.5786 14.0609 17 13 17H11C9.93913 17 8.92172 16.5786 8.17157 15.8284C7.42143 15.0783 7 14.0609 7 13V4M7 4C5.14 4 4 5.14 4 7C4 8.86 5.14 10 7 10V10" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide uppercase leading-tight">NASA Space Apps Hackathon 2nd runners up</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-32 px-6 relative overflow-hidden bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col items-center mb-20 text-center">
+        <div class="font-tech text-xs tracking-[0.4em] text-accent mb-6 opacity-70 about-label">
+          // RCRIC_RECON_DATA
+        </div>
+        <h2 class="font-display text-3xl md:text-6xl font-bold text-white tracking-tight">
+          Who We Are
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <!-- Details Card -->
+        <div class="reveal-left">
+          <div class="feature-card p-8 lg:p-12 h-full flex flex-col justify-center relative overflow-hidden group">
+            <div class="feature-card-shine"></div>
+            <div class="scan-line"></div>
+
+            <p class="text-white/60 text-base leading-relaxed font-light auto-word-reveal relative z-10">
+              Founded in <b>2016</b> and reformed in <b>2022</b>, under the guidance of our <b>Officer in Charge Md.
+                Selim Ahmed</b>, <b>Rajuk College Robotics & ICT Club (RCRIC)</b> serves as the place where students of
+              <b>Rajuk Uttara Model College</b> can bring their technical ideas to life. Our club is a friendly space
+              where you can learn and interact just by being curious about tech. Our goal is to equip students with
+              <b>real-world
+                robotics and ICT skills</b> that prepare them for the <b>global tech industry</b>. At RCRIC, we focus on
+              learning by experimentation and observation, where our members get to work directly with hardware, write
+              actual computer programs, and tackle real engineering problems. You don't need to be an expert to join,
+              you just need to be <b>curious</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Image Content -->
+        <div class="relative h-[400px] lg:h-auto overflow-hidden group rounded-lg border border-white/10 reveal-right">
+          <div class="tech-corner tl !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner tr !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner bl !w-6 !h-6 !border-white/20"></div>
+          <div class="tech-corner br !w-6 !h-6 !border-white/20"></div>
+
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop"
+            alt="RCRIC Team" class="w-full h-full object-cover transition-all duration-1000" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-32 px-6 relative overflow-hidden bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col items-center mb-16">
+        <div class="font-tech text-xs tracking-[0.4em] text-accent mb-4 opacity-70">
+          // RCRIC_ARCHIVE
+        </div>
+        <h2 class="font-display text-4xl md:text-6xl font-bold text-center text-white tracking-tight mb-16">
+          <div class="section-title-wrap reveal-text">
+            <span class="section-title-word"><span>Gallery</span></span><span class="section-title-line"></span>
+          </div>
+        </h2>
+
+      </div>
+
+      <div class="gallery-grid stagger-children reveal-card">
+        <!-- Item 01 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
+            alt="Workshop" />
+        </div>
+
+        <!-- Item 02 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1518314916381-77a37c2a49ae?q=80&w=800&auto=format&fit=crop"
+            alt="Electronics" />
+        </div>
+
+        <!-- Item 03 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+            alt="Fabrication" />
+        </div>
+
+        <!-- Item 04 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop"
+            alt="Team" />
+        </div>
+
+        <!-- Item 05 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop"
+            alt="AI Lab" />
+        </div>
+
+        <!-- Item 06 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop"
+            alt="Drone" />
+        </div>
+
+        <!-- Item 07 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=800&auto=format&fit=crop"
+            alt="Coding" />
+        </div>
+
+        <!-- Item 08 -->
+        <div class="gallery-item group" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=800&auto=format&fit=crop"
+            alt="Competition" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <div id="lightbox-close" class="group" onclick="closeLightbox()">
+      <div class="close-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"
+          stroke-linejoin="miter" class="w-5 h-5">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </div>
+    </div>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <!-- Join Us Section (Redesigned HUD) -->
+  <section id="join" class="py-32 px-6 relative overflow-hidden bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="reveal-card p-10 relative overflow-hidden group">
+        <div class="relative z-10 flex flex-col items-center text-center">
+
+          <div class="-mt-16 md:-mt-24 mb-8 reveal-text">
+            <img src="assets/logo.png" alt="RCRIC Logo" class="w-64 md:w-[500px] h-auto" />
+          </div>
+
+          <h2 class="font-display text-4xl md:text-7xl font-bold mb-10 text-white tracking-tight">
+            Ready to Learn?
+          </h2>
+
+          <p class="text-white/60 text-lg md:text-xl mb-14 max-w-2xl font-light leading-relaxed reveal-text delay-200">
+            Bridging the gap between vision and reality.
+            We’re looking for the next generation of tech enthusiasts, designers, and engineers.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-8 reveal-text delay-300">
+            <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank"
+              class="nav-btn-join !px-16 !py-6 !text-[15px] !ml-0 transition-all duration-300 shadow-[0_0_30px_rgba(147,51,234,0.3)] hover:shadow-[0_0_50px_rgba(147,51,234,0.5)] !tracking-[0.2em]">
+              JOIN THE CLUB
+            </a>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-32 px-6 bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto footer-glass p-12 md:p-16 relative overflow-hidden">
+      <!-- Tech Corners for Footer -->
+      <div class="tech-corner tl !w-8 !h-8 opacity-30"></div>
+      <div class="tech-corner tr !w-8 !h-8 opacity-30"></div>
+      <div class="tech-corner bl !w-8 !h-8 opacity-30"></div>
+      <div class="tech-corner br !w-8 !h-8 opacity-30"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+        <div class="col-span-1 md:col-span-1">
+          <h4 class="font-display font-bold text-2xl mb-4">RCRIC</h4>
+          <p class="text-white/40 text-sm leading-relaxed">
+            Building Robots and teaching enthusiasts how to build.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="font-bold mb-6 text-sm tracking-wider uppercase text-white/80">
+            Navigation
+          </h5>
+          <ul class="space-y-3 text-sm text-white/50">
+            <li>
+              <a href="#home" class="hover:text-white transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="#features" class="hover:text-white transition-colors">Activities</a>
+            </li>
+            <li>
+              <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+            </li>
+            <li>
+              <a href="#achievements" class="hover:text-white transition-colors">Achievements</a>
+            </li>
+            <li>
+              <a href="#about" class="hover:text-white transition-colors">About RCRIC</a>
+            </li>
+            <li>
+              <a href="pages/executives.html" class="hover:text-white transition-colors">Executives</a>
+            </li>
+            <li>
+              <a href="https://forms.gle/xnCT58B4PuQkRUdp9" target="_blank"
+                class="hover:text-white transition-colors">Join Us</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold mb-6 text-sm tracking-wider uppercase text-white/80">
+            Social Uplink
+          </h5>
+          <ul class="space-y-3 text-sm text-white/50">
+            <li>
+              <a href="https://www.facebook.com/rajuk.ric" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-2">Facebook <span
+                  class="text-xs opacity-50">↗</span></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/rajuk.ric/" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-2">Instagram <span
+                  class="text-xs opacity-50">↗</span></a>
+            </li>
+            <li>
+              <a href="https://github.com/rc-ric/" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-2">GitHub <span
+                  class="text-xs opacity-50">↗</span></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/rajuk-college-robotics-ict-club-rcric" target="_blank"
+                rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LinkedIn
+                <span class="text-xs opacity-50">↗</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold mb-6 text-sm tracking-wider uppercase text-white/80">
+            Contact
+          </h5>
+          <a href="mailto:rajuk.ric@gmail.com"
+            class="text-sm text-white/50 hover:text-white transition-colors">[rajuk.ric@gmail.com]</a>
+        </div>
+      </div>
+
+      <div
+        class="mt-20 flex flex-col md:flex-row justify-center items-center gap-4 text-xs text-white/30 relative z-10">
+        <p>
+          <a href="https://github.com/rc-ric/rc-ric.github.io/blob/main/LICENSE" target="_blank"
+            rel="noopener noreferrer" class="hover:text-white transition-colors">&copy; 2026</a> RCRIC Developers
+
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-top-btn" class="group" aria-label="Scroll to top" title="Back to top">
+    <span class="tech-corner tl" aria-hidden="true"></span>
+    <span class="tech-corner tr" aria-hidden="true"></span>
+    <span class="tech-corner bl" aria-hidden="true"></span>
+    <span class="tech-corner br" aria-hidden="true"></span>
+    <span class="scroll-top-icon" aria-hidden="true">^</span>
+  </button>
+
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>
